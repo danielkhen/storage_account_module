@@ -28,7 +28,7 @@ module "storage_diagnostic" {
 }
 
 locals {
-  subresources = ["blob", "file", "table", "queue"]
+  subresources                = ["blob", "file", "table", "queue"]
   subresources_diagnostic_map = {
     for subresource in local.subresources : subresource => {
       name               = "${azurerm_storage_account.storage.name}-${subresource}-diagnostic"
@@ -44,4 +44,26 @@ module "subresources_diagnostics" {
   name                       = each.value.name
   target_resource_id         = each.value.target_resource_id
   log_analytics_workspace_id = var.log_analytics_id
+}
+
+locals {
+  private_endpoints_map = {for subresource in var.private_endpoints : subresource.name => subresource}
+}
+
+module "subresources_private_endpoints" {
+  source   = "github.com/danielkhen/private_endpoint_module"
+  for_each = var.private_endpoint_enabled ? local.private_endpoints_map : {}
+
+  name                = each.value.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  nic_name            = each.value.nic_name
+  private_dns_enabled = var.private_dns_enabled
+  dns_name            = each.value.dns_name
+  log_analytics_id    = var.log_analytics_id
+
+  resource_id      = azurerm_storage_account.storage.id
+  subresource_name = each.value.subresource_name
+  subnet_id        = var.private_endpoints_subnet_id
+  vnet_links       = var.vnet_links
 }

@@ -28,7 +28,7 @@ module "storage_diagnostic" {
 }
 
 locals {
-  subresources                = ["blob", "file", "table", "queue"]
+  subresources = ["blob", "file", "table", "queue"]
   subresources_diagnostic_map = {
     for subresource in local.subresources : subresource => {
       name               = "${azurerm_storage_account.storage.name}-${subresource}-diagnostic"
@@ -47,7 +47,7 @@ module "subresources_diagnostics" {
 }
 
 locals {
-  private_endpoints_map = {for subresource in var.private_endpoints : subresource.name => subresource}
+  private_endpoints_map = { for subresource in var.private_endpoints : subresource.name => subresource }
 }
 
 module "subresources_private_endpoints" {

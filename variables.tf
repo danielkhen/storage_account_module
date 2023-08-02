@@ -94,7 +94,6 @@ variable "private_endpoints" {
   description = "(Optional) A list of private endpoints of the storage subresources."
   type = list(object({
     name             = string
-    nic_name         = string
     subresource_name = string
     dns_name         = optional(string)
   }))

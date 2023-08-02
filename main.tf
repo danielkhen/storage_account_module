@@ -57,7 +57,6 @@ module "subresources_private_endpoints" {
   name                = each.value.name
   location            = var.location
   resource_group_name = var.resource_group_name
-  nic_name            = each.value.nic_name
   private_dns_enabled = var.private_dns_enabled
   dns_name            = each.value.dns_name
   log_analytics_id    = var.log_analytics_id

@@ -50,6 +50,15 @@ locals {
   private_endpoints_map = { for subresource in var.private_endpoints : subresource.name => subresource }
 }
 
+module "private_dns_zone" {
+  source   = "github.com/danielkhen/private_dns_zone_module"
+  for_each = var.private_dns_enabled ? local.private_endpoints_map : {}
+
+  name                = each.value.dns_name
+  resource_group_name = var.resource_group_name
+  vnet_links          = var.vnet_links
+}
+
 module "subresources_private_endpoints" {
   source   = "github.com/danielkhen/private_endpoint_module"
   for_each = var.private_endpoint_enabled ? local.private_endpoints_map : {}
@@ -58,11 +67,10 @@ module "subresources_private_endpoints" {
   location            = var.location
   resource_group_name = var.resource_group_name
   private_dns_enabled = var.private_dns_enabled
-  dns_name            = each.value.dns_name
+  private_dns_zone_id = var.private_dns_enabled ? module.private_dns_zone[each.key].id : null
   log_analytics_id    = var.log_analytics_id
 
   resource_id      = azurerm_storage_account.storage.id
   subresource_name = each.value.subresource_name
   subnet_id        = var.private_endpoints_subnet_id
-  vnet_links       = var.vnet_links
 }

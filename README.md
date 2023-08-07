@@ -20,7 +20,7 @@
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the storage account. | `string` | n/a | yes |
 | <a name="input_private_dns_enabled"></a> [private\_dns\_enabled](#input\_private\_dns\_enabled) | (Optional) Should the private endpoint be attached to a private dns zone. | `bool` | `false` | no |
 | <a name="input_private_endpoint_enabled"></a> [private\_endpoint\_enabled](#input\_private\_endpoint\_enabled) | (Optional) Should the container registry have a private endpoint. | `bool` | `false` | no |
-| <a name="input_private_endpoints"></a> [private\_endpoints](#input\_private\_endpoints) | (Optional) A list of private endpoints of the storage subresources. | <pre>list(object({<br>    name             = string<br>    nic_name         = string<br>    subresource_name = string<br>    dns_name         = optional(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_private_endpoints"></a> [private\_endpoints](#input\_private\_endpoints) | (Optional) A list of private endpoints of the storage subresources. | <pre>list(object({<br>    name             = string<br>    subresource_name = string<br>    dns_name         = optional(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_private_endpoints_subnet_id"></a> [private\_endpoints\_subnet\_id](#input\_private\_endpoints\_subnet\_id) | (Optional) The subnet id of the private endpoints. | `string` | `false` | no |
 | <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | (Optional) Allow public network access. | `bool` | `false` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The resource group name of the storage account. | `string` | n/a | yes |
@@ -44,6 +44,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_private_dns_zone"></a> [private\_dns\_zone](#module\_private\_dns\_zone) | github.com/danielkhen/private_dns_zone_module | n/a |
 | <a name="module_storage_diagnostic"></a> [storage\_diagnostic](#module\_storage\_diagnostic) | github.com/danielkhen/diagnostic_setting_module | n/a |
 | <a name="module_subresources_diagnostics"></a> [subresources\_diagnostics](#module\_subresources\_diagnostics) | github.com/danielkhen/diagnostic_setting_module | n/a |
 | <a name="module_subresources_private_endpoints"></a> [subresources\_private\_endpoints](#module\_subresources\_private\_endpoints) | github.com/danielkhen/private_endpoint_module | n/a |

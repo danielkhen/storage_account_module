@@ -66,12 +66,6 @@ variable "enable_https_traffic_only" {
   default     = true
 }
 
-variable "public_network_access_enabled" {
-  description = "(Optional) Allow public network access."
-  type        = bool
-  default     = false
-}
-
 variable "private_endpoint_enabled" {
   description = "(Optional) Should the container registry have a private endpoint."
   type        = bool

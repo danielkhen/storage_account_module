@@ -22,7 +22,6 @@
 | <a name="input_private_endpoint_enabled"></a> [private\_endpoint\_enabled](#input\_private\_endpoint\_enabled) | (Optional) Should the container registry have a private endpoint. | `bool` | `false` | no |
 | <a name="input_private_endpoints"></a> [private\_endpoints](#input\_private\_endpoints) | (Optional) A list of private endpoints of the storage subresources. | <pre>list(object({<br>    name             = string<br>    subresource_name = string<br>    dns_name         = optional(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_private_endpoints_subnet_id"></a> [private\_endpoints\_subnet\_id](#input\_private\_endpoints\_subnet\_id) | (Optional) The subnet id of the private endpoints. | `string` | `false` | no |
-| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | (Optional) Allow public network access. | `bool` | `false` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The resource group name of the storage account. | `string` | n/a | yes |
 | <a name="input_vnet_links"></a> [vnet\_links](#input\_vnet\_links) | (Optional) A list of virtual networks to link with the private dns zone. | <pre>list(object({<br>    name    = string<br>    vnet_id = string<br>  }))</pre> | `[]` | no |
 
